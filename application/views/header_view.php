@@ -11,7 +11,7 @@
         </style>
     </head>
     <body>
-        <div id="header" class="container navbar navbar-inverse">
+        <div id="header" class="container navbar navbar-inverse navbar-static-top">
             <div class="navbar-inner">
             <a class="brand" href="#">Aprendizaje del Sistema Digestivo Humano</a>
             <ul class="nav">
