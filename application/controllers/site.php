@@ -6,7 +6,9 @@ class Site extends CI_Controller {
     }
     function loadView($config) {
         $this->load->view('header_view.php');
-        $this->load->view($config["view"], $config["parameters"]);
+        foreach($config as $configItem){
+            $this->load->view($configItem["view"], $configItem["parameters"]);
+        }
         $this->load->view('footer_view.php');
     }
 }

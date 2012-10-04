@@ -1,55 +1,46 @@
 <?php
-class Imagenes_model extends Model
+class Imagenes_model extends CI_Model
 {
 
-	function Imagenes_model()
-	{
-		parent::Model();
-		$this->load->database();
-	}
+        public function __construct() {
+            parent::__construct();
+        }
 
 	function create($data)
 	{
-		$this->db->set('ruta', $data['ruta']);
-		$this->db->set('pregunta_id', $data['pregunta_id']);
-		$this->db->set('orden', $data['orden']);
-		$this->db->insert('imagenes');
-
-		return $this->db->affected_rows();
+            $this->db->insert('imagenes', $data);
+            /*return $this->db->affected_rows();*/
+            return true;
 	}
 
 	function read($id)
 	{
-		$this->db->where('id', $id);
-		$query = $this->db->get('imagenes');
+            $this->db->where('id', $id);
+            $query = $this->db->get('imagenes');
 
-		return $query;
+            return $query;
 	}
 
 	function readAll()
 	{
-		$query = $this->db->get('imagenes');
+            $query = $this->db->get('imagenes');
 
-		return $query;
+            return $query;
 	}
 
 	function update($id, $data)
 	{
-		$this->db->where('id', $data['id']);
-		$this->db->set('ruta', $data['ruta']);
-		$this->db->set('pregunta_id', $data['pregunta_id']);
-		$this->db->set('orden', $data['orden']);
-		$this->db->update('imagenes');
+            $this->db->update('imagenes', $data);
 
-		return $this->db->affected_rows();
+            return $this->db->affected_rows();
 	}
 
 	function delete($id)
 	{
-		$this->db->where('id', $id);
-		$this->db->delete('imagenes');
+            $this->db->where('id', $id);
+            $this->db->delete('imagenes');
 
-		return $this->db->affected_rows();
+            return $this->db->affected_rows();
 	}
 
 }
