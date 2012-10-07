@@ -1,3 +1,9 @@
+<script type="text/javascript">
+var textPregunta = "";
+$(document).ready(function(){
+    textPregunta = $("#prevPregunta").html();
+});    
+</script>
 <div id="contentTest">
     <h1>Administracion de Test</h1>
     <p class="lead">Ingresa la información requerida para los campos disponibles, y genera una pregunta completa luego de terminar el proceso.</p>
@@ -31,4 +37,6 @@
             </div>
         </div>
     </form>
+    <legend>Previzualización de pregunta</legend>
+    <p id="prevPregunta"><?php echo $pregunta; ?></p> 
 </div>

@@ -1,5 +1,5 @@
 <script type="text/javascript">
-
+    var arrayImagenes = new Array(); 
     $(document).ready(function(){
         $.ajax({
             type: "GET",
@@ -23,6 +23,7 @@
                                 break;
                         }
                     }
+                    $("#action").val("update");
                 }
             },
             error: function(error){
@@ -42,7 +43,8 @@
                 }
                 if(result[0] != undefined){
                     for (i = 0; i < count; i++) {
-                        $("#imagenesCargadas").append("<div id='imagen" + result[i].id + "'><legend>" + result[i].nombre + "</legend><img width='70px' height='70px' class='img-polaroid' src='<?php echo base_url("files");?>/" + result[i].ruta + "'/> <input type='button' onclick='eliminarImagen(" + result[i].id + ");' value='Eliminar Imagen'/></div>");
+                        arrayImagenes.push([result[i].nombre, "<img width='70px' height='70px' class='img-polaroid' src='<?php echo base_url("files"); ?>/" + result[i].ruta + "'/>"]);
+                        $("#imagenesCargadas").append("<div id='imagen" + result[i].id + "'><legend>" + result[i].nombre + "</legend><img width='70px' height='70px' class='img-polaroid' src='<?php echo base_url("files"); ?>/" + result[i].ruta + "'/> <input type='button' onclick='eliminarImagen(" + result[i].id + ");' value='Eliminar Imagen'/></div>");
                     }
                 }
             },
@@ -53,8 +55,10 @@
         $("#saveRespuestas").click(function(){
             $.ajax({
                 type: "GET",
-                url: "<?php echo site_url("respuesta/agregar/$id"); ?>/" + $("#respuestaOne").val() + "/" + $("#respuestaTwo").val() + "/" + $("#respuestaThree").val() + "/" + $("#respuestaFour").val(),
-                success: function(result){alert(result);},
+                url: "<?php echo site_url("respuesta/agregar/$id"); ?>/" + $("#respuestaOne").val() + "/" + $("#respuestaTwo").val() + "/" + $("#respuestaThree").val() + "/" + $("#respuestaFour").val() + "/" + $("#action").val(),
+                success: function(result){
+                    alert(result);
+                },
                 error: function(error){aler(error);}
             });
         });
@@ -66,17 +70,24 @@
                 error: function(error){aler(error);}
             });
         });
+        
+        alert(textPregunta);
+        for (var item in arrayImagenes) {
+            var search = "["+arrayImagenes[item][0]+"]";
+            textPregunta = textPregunta.replace(search," " + arrayImagenes[item][1] + " ");
+        }
+        $("#prevPregunta").html(textPregunta);
     });
     function eliminarImagen(id){
         alert("imagen"+id);
         $.ajax({
-                type: "GET",
-                url: "<?php echo site_url("imagen/eliminar"); ?>/" + id,
-                success: function(result){ 
-                    $("#imagen"+id).hide();
-                },
-                error: function(error){aler(error);}
-            });
+            type: "GET",
+            url: "<?php echo site_url("imagen/eliminar"); ?>/" + id,
+            success: function(result){ 
+                $("#imagen"+id).hide();
+            },
+            error: function(error){aler(error);}
+        });
     }
 </script>
 <style>
@@ -102,7 +113,7 @@
         <input id="respuestaThree" name="respuestaThree" type="text" placeholder="Ingrese texto..." value=""/>
         <legend>Respuesta No. 4</legend>
         <input id="respuestaFour" name="respuestaFour" type="text" placeholder="Ingrese texto..." value=""/>
-
+        <input type="hidden" id="action" value="add" />
         <input name="saveRespuestas" id="saveRespuestas" type="submit" value="Guardar Respuestas" class="btn  btn-primary" />
     </div>
     <br/>

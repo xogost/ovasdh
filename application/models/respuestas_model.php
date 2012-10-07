@@ -23,7 +23,8 @@ class Respuestas_model extends CI_Model {
     }
 
     function update($id, $data) {
-        $this->db->update('respuestas');
+        $this->db->where('id', $id);
+        $this->db->update('respuestas', $data);
         return $this->db->affected_rows();
     }
 
