@@ -1,44 +1,59 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 require_once 'site.php';
+
 class Test extends CI_Controller {
+
     function index() {
         $this->load->model("Test_model", '', true);
         $dataTest = $this->Test_model->selectAll();
         $parameters = array("testArray" => $dataTest);
-        $parametersView = array("view"=>'test/list_view', "parameters" => $parameters);
+        $parametersView = array(
+            array("view" => 'test/list_view', "parameters" => $parameters)
+        );
         site::loadView($parametersView);
     }
+
     function form_new() {
-        $parametersView = array("view"=>'test/new_view', "parameters" => '');
+        $parametersView = array(
+            array("view" => 'test/new_view', "parameters" => '')
+        );
         site::loadView($parametersView);
     }
+
     function form_update($id) {
         $this->load->model("Test_model", '', true);
         $row = $this->Test_model->selectOne($id)->result();
-        if(isset($row[0]->nombre))
-            $parameters =  array("id"=>$id,"fechacreacion"=>$row[0]->fechacreacion ,"nombre" =>$row[0]->nombre, "placeholder" => 'Nombre No Asignado ...');
+        if (isset($row[0]->nombre))
+            $parameters = array("id" => $id, "fechacreacion" => $row[0]->fechacreacion, "nombre" => $row[0]->nombre, "placeholder" => 'Nombre No Asignado ...');
         else
-            $parameters =  array("id"=>$id,"fechacreacion"=>$row[0]->fechacreacion ,"nombre"=>'', "placeholder" => 'Nombre No Asignado ...');
-        
-        $parametersView = array("view"=>'test/update_view', "parameters" => $parameters);
+            $parameters = array("id" => $id, "fechacreacion" => $row[0]->fechacreacion, "nombre" => '', "placeholder" => 'Nombre No Asignado ...');
+
+        $parametersView = array(
+            array("view" => 'test/update_view', "parameters" => $parameters)
+        );
         site::loadView($parametersView);
     }
+
     function insert() {
         $nombre = $_POST["nombre"];
         $this->load->model("Test_model", '', true);
-        $data = array("nombre"=>$nombre, "fechacreacion" => date("Y/m/d H:i:s"), "fechaactualizacion" => date("Y/m/d H:i:s"), "usuario_id"=> 1);
+        $data = array("nombre" => $nombre, "fechacreacion" => date("Y/m/d H:i:s"), "fechaactualizacion" => date("Y/m/d H:i:s"), "usuario_id" => 1);
         $this->Test_model->create($data);
         redirect(site_url("test/index"));
     }
+
     function update() {
         $id = $_POST["id"];
         $nombre = $_POST["nombre"];
         $fechacreacion = $_POST["fechacreacion"];
         $this->load->model("Test_model", '', true);
-        $data = array("id"=>(int)$id, "nombre"=>$nombre, "fechacreacion" => $fechacreacion,"fechaactualizacion" => date("Y/m/d H:i:s"), "usuario_id"=> 1);
+        $data = array("id" => (int) $id, "nombre" => $nombre, "fechacreacion" => $fechacreacion, "fechaactualizacion" => date("Y/m/d H:i:s"), "usuario_id" => 1);
         $this->Test_model->update($data);
         redirect(site_url("test/index"));
-        
     }
+
 }

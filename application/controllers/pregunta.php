@@ -11,12 +11,16 @@ class Pregunta extends CI_Controller {
         $this->load->model("preguntas_model", '', true);
         $dataTest = $this->preguntas_model->readAll();
         $parameters = array("preguntasArray" => $dataTest, "id" => $id);
-        $parametersView = array("view" => 'preguntas/index', "parameters" => $parameters);
+        $parametersView = array(
+            array("view" => 'preguntas/index', "parameters" => $parameters)
+        );
         site::loadView($parametersView);
     }
 
     function form_new($id) {
-        $parametersView = array("view" => 'preguntas/new_view', "parameters" => array("id" => $id));
+        $parametersView = array(
+            array("view" => 'preguntas/new_view', "parameters" => array("id" => $id))
+        );
         site::loadView($parametersView);
     }
 
@@ -26,7 +30,7 @@ class Pregunta extends CI_Controller {
         $item = $row->result();
         $parametersView = array(
             array("view" => 'preguntas/update_new', "parameters" => array("id" => $id, "test" => $test, "pregunta" => $item[0]->pregunta == null ? "" : $item[0]->pregunta, "valor" => $item[0]->valor == null ? "" : $item[0]->valor, "respuestacorrecta" => $item[0]->respuestacorrecta == null ? "" : $item[0]->respuestacorrecta)),
-            array("view" => 'imagenes/loadImage', "parameters" => array("id" => $id)),
+            array("view" => 'imagenes/loadImage', "parameters" => array("id" => $id, "test_id" => $test)),
         );
         site::loadView($parametersView);
     }

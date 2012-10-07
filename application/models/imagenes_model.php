@@ -15,7 +15,7 @@ class Imagenes_model extends CI_Model
 
 	function read($id)
 	{
-            $this->db->where('id', $id);
+            $this->db->where('pregunta_id', $id);
             $query = $this->db->get('imagenes');
 
             return $query;

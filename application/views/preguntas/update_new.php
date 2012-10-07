@@ -8,7 +8,7 @@
             <input type="hidden" value="<?php echo $id; ?>" />
             <label class="control-label" from="pregunta">Pregunta</label>
             <div class="controls">
-                <input name="pregunta" id="pregunta" type="text" placeholder="Ingrese texto aqui..." value="<?php echo $pregunta; ?>"/> 
+                <textarea style="width: 80%;" name="pregunta" id="pregunta" placeholder="Ingrese texto aqui..." ><?php echo $pregunta; ?></textarea> 
             </div>
         </div>
         <div class="control-group">
