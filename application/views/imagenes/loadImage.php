@@ -71,7 +71,6 @@
             });
         });
         
-        alert(textPregunta);
         for (var item in arrayImagenes) {
             var search = "["+arrayImagenes[item][0]+"]";
             textPregunta = textPregunta.replace(search," " + arrayImagenes[item][1] + " ");
