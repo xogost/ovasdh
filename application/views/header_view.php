@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Objeto virtual de aprendizaje del sistema digestivo humano.</title>
         <meta charset="utf-8"/>
         <script src="<?php echo base_url() . "js/zepto.min.js" ?>" type="text/javascript" ></script>
         <link href="<?php echo base_url() . "css/css/bootstrap.css" ?>" type="text/css" rel="stylesheet" />
+        <link href="<?php echo base_url() . "css/site.css" ?>" type="text/css" rel="stylesheet" />
 
         <style>
             #header{width: 100%;}

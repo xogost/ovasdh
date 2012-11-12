@@ -1,8 +1,16 @@
 <script type="text/javascript">
-var textPregunta = "";
-$(document).ready(function(){
-    textPregunta = $("#prevPregunta").html();
-});    
+    var textPregunta = "";
+    var arrayImagenes = new Array(); 
+    $(document).ready(function(){
+        textPregunta = $("#prevPregunta").html();
+    });
+    function prev(){
+        for (var item in arrayImagenes) {
+            var search = "["+arrayImagenes[item][0]+"]";
+            textPregunta = textPregunta.replace(search," " + arrayImagenes[item][1] + " ");
+        }
+        $("#prevPregunta").html(textPregunta);
+    }
 </script>
 <div id="contentTest">
     <h1>Administracion de Test</h1>
@@ -39,4 +47,6 @@ $(document).ready(function(){
     </form>
     <legend>Previzualización de pregunta</legend>
     <p id="prevPregunta"><?php echo $pregunta; ?></p> 
+    
+    <button onclick="prev();">Previsualizar</button>
 </div>

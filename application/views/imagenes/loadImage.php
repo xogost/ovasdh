@@ -1,5 +1,4 @@
 <script type="text/javascript">
-    var arrayImagenes = new Array(); 
     $(document).ready(function(){
         $.ajax({
             type: "GET",
@@ -52,6 +51,7 @@
                 aler(error);
             }
         });
+        alert(arrayImagenes);
         $("#saveRespuestas").click(function(){
             $.ajax({
                 type: "GET",
@@ -70,7 +70,6 @@
                 error: function(error){aler(error);}
             });
         });
-        
         for (var item in arrayImagenes) {
             var search = "["+arrayImagenes[item][0]+"]";
             textPregunta = textPregunta.replace(search," " + arrayImagenes[item][1] + " ");

@@ -55,5 +55,11 @@ class Test extends CI_Controller {
         $this->Test_model->update($data);
         redirect(site_url("test/index"));
     }
+    
+    function getTest(){
+        $this->load->model("Test_model", 'Test', true);
+        $testArray = $this->Test->selectAll();
+        echo json_encode($testArray->result());
+    }
 
 }
