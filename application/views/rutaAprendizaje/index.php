@@ -90,6 +90,6 @@
     <legend>Tests Correspondientes a la categoria seleccionada.</legend>
     <ul id="test"></ul>
     <div style="clear: both;">* Orden: <input id="ordentest" type="text" value=""/></div>
-    <input type="button" class="btn btn-large btn-inverse btnMe" onclick="insertRutaAprendizaje();" value="Crear Ruta de Aprendizaje">
+    <input type="button" class="btn btn-large btn-inverse btnMe" onclick="insertRutaAprendizaje();" value="Crear Ruta de Aprendizaje"/>
 </div>
 

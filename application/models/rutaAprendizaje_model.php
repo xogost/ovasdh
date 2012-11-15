@@ -15,7 +15,7 @@ class RutaAprendizaje_model extends CI_Model {
             return $this->db->affected_rows();
         }
         function selectAll() {
-            $query = $this->db->get('rutaPrendizaje');
+            $query = $this->db->get('rutaaPrendizaje');
             return $query;
         }
         
