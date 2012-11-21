@@ -9,16 +9,16 @@
     <p>Genera un listado de las preguntas existentes para visualizar de forma ordenada y precisa la información.</p>
     <table class="table table-condensed">
         <thead>
-            <tr><th>#</th> <th>Pregunta</th><th>Respuestas</th><th>Actualizar</th></tr>
+            <tr><th>#</th><th>Pregunta</th><th>Actualizar</th></tr>
         </thead>
         <tbody>
-            <?  
+            <?php  
             $autoNumerico = 1;
             foreach ($preguntasArray->result() as $preguntasItem){
                 if($preguntasItem->pregunta == null)
-                    echo "<tr><td>$autoNumerico</td><td>Pregunta no asignada</td><td><a href='". site_url("preguntas/form_update/$preguntasItem->id") ."' class='btn btn-info'><i class='icon-list'></i> Preguntas</a></td><td><a href='". site_url("pregunta/form_update/$preguntasItem->id/$id") ."' class='btn btn-success'><i class='icon-pencil'></i> Actualizar</a></td></tr>";
+                    echo "<tr><td>$autoNumerico</td><td>Pregunta no asignada</td><td><a href='". site_url("pregunta/form_update/$preguntasItem->id/$id") ."' class='btn btn-success'><i class='icon-pencil'></i> Actualizar</a></td></tr>";
                 else
-                    echo "<tr><td>$autoNumerico</td><td>$preguntasItem->pregunta</td><td><a href='". site_url("preguntas/form_update/$preguntasItem->id") ."' class='btn btn-info'><i class='icon-list'></i> Preguntas</a></td><td><a href='". site_url("pregunta/form_update/$preguntasItem->id/$id") ."' class='btn btn-success'><i class='icon-pencil'></i> Actualizar</a></td></tr>";
+                    echo "<tr><td>$autoNumerico</td><td>$preguntasItem->pregunta</td><td><a href='". site_url("pregunta/form_update/$preguntasItem->id/$id") ."' class='btn btn-success'><i class='icon-pencil'></i> Actualizar</a></td></tr>";
                 $autoNumerico++;
             } 
             ?>

@@ -16,4 +16,10 @@
         </ol>
         <button type="button" class="btn btn-large btn-inverse" onclick="window.location = '<?php echo base_url("index.php/rutaAprendizaje/index"); ?>';">Crear Ruta de Aprendizaje</button>
     </div>
+    <div class="control">
+        <ol>
+            <li>Ejecute el proceso de creación de test.</li>
+        </ol>
+        <button type="button" class="btn btn-large btn-inverse" onclick="window.location = '<?php echo base_url("index.php/test/"); ?>';">Crear Ruta de Aprendizaje</button>
+    </div>
 </div>

@@ -25,9 +25,7 @@
                     $("#action").val("update");
                 }
             },
-            error: function(error){
-                aler(error);
-            }
+            error: function(error){ aler(error);}
         });
         $.ajax({
             type: "GET",
@@ -43,7 +41,7 @@
                 if(result[0] != undefined){
                     for (i = 0; i < count; i++) {
                         arrayImagenes.push([result[i].nombre, "<img width='70px' height='70px' class='img-polaroid' src='<?php echo base_url("files"); ?>/" + result[i].ruta + "'/>"]);
-                        $("#imagenesCargadas").append("<div id='imagen" + result[i].id + "'><legend>" + result[i].nombre + "</legend><img width='70px' height='70px' class='img-polaroid' src='<?php echo base_url("files"); ?>/" + result[i].ruta + "'/> <input type='button' onclick='eliminarImagen(" + result[i].id + ");' value='Eliminar Imagen'/></div>");
+                        $("#imagenesCargadas").append("<div id='imagen" + result[i].id + "'><legend>" + result[i].nombre + "</legend><img width='70px' height='70px' class='img-polaroid' src='<?php echo base_url("files"); ?>/" + result[i].ruta + "'/> <input type='button' class='btn' onclick='eliminarImagen(" + result[i].id + ");' value='Eliminar Imagen'/></div>");
                     }
                 }
             },
@@ -51,7 +49,6 @@
                 aler(error);
             }
         });
-        alert(arrayImagenes);
         $("#saveRespuestas").click(function(){
             $.ajax({
                 type: "GET",

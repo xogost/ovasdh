@@ -12,7 +12,7 @@
             <tr><th>#</th> <th>Nombre Test</th><th>Preguntas</th><th>Actualizar</th></tr>
         </thead>
         <tbody>
-            <?  
+            <?php  
             $autoNumerico = 0;
             foreach ($testArray->result() as $testItem){
                 if($testItem->nombre == null)

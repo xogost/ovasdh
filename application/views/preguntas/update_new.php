@@ -48,5 +48,5 @@
     <legend>Previzualización de pregunta</legend>
     <p id="prevPregunta"><?php echo $pregunta; ?></p> 
     
-    <button onclick="prev();">Previsualizar</button>
+    <button class="btn" onclick="prev();">Previsualizar</button>
 </div>
