@@ -19,7 +19,7 @@ class rutaAprendizaje extends CI_Controller {
             $this->load->model("RutaAprendizaje_model", "rutaAprendizaje", true);
             $data = array("nombre" => $_POST["nombre"], "data" => implode(',',$arrayFlujoRutaAprendizaje), "fecha_creacion" => "NOW()", "usuario_id" => 1);
             $this->rutaAprendizaje->create($data);
-            echo "ok";
+            echo "La ruta de aprendizaje se almacenó correctamente.";
         } catch (Exception $e) {
             echo error;
         }

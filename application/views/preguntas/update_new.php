@@ -3,6 +3,7 @@
     var arrayImagenes = new Array(); 
     $(document).ready(function(){
         textPregunta = $("#prevPregunta").html();
+        $("#subcategorias").val("<?php echo $subcategoria; ?>");
     });
     function prev(){
         for (var item in arrayImagenes) {
@@ -18,6 +19,18 @@
     <br/>
     <form id="frmTest" action="<?php echo site_url("pregunta/update/$id/$test"); ?>" class="form-horizontal" method="POST">
         <legend>Agregar Nueva Pregunta</legend>
+        <div class="control-group">
+            <label class="control-label" from="pregunta">Subcategoria</label>
+            <div class="controls">
+                <select id="subcategorias" name="subcategorias">
+                    <?php  
+                        foreach($arraySubcategorias->result() as $itemSubcategoria){
+                            echo "<option id='$itemSubcategoria->id' value='$itemSubcategoria->subcategoria' >".$itemSubcategoria->subcategoria."</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+        </div>
         <div class="control-group">
             <input type="hidden" value="<?php echo $id; ?>" />
             <label class="control-label" from="pregunta">Pregunta</label>

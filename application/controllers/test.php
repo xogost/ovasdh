@@ -28,7 +28,7 @@ class Test extends CI_Controller {
         $this->load->model("Test_model", '', true);
         $row = $this->Test_model->selectOne($id)->result();
         if (isset($row[0]->nombre))
-            $parameters = array("id" => $id, "fechacreacion" => $row[0]->fechacreacion, "nombre" => $row[0]->nombre, "placeholder" => 'Nombre No Asignado ...');
+            $parameters = array("id" => $id, "fechacreacion" => $row[0]->fechacreacion, "nombre" => $row[0]->nombre, "tipo" => $row[0]->tipo, "placeholder" => 'Nombre No Asignado ...');
         else
             $parameters = array("id" => $id, "fechacreacion" => $row[0]->fechacreacion, "nombre" => '', "placeholder" => 'Nombre No Asignado ...');
 
@@ -40,8 +40,9 @@ class Test extends CI_Controller {
 
     function insert() {
         $nombre = $_POST["nombre"];
+        $tipo = $_POST["tipo"];
         $this->load->model("Test_model", '', true);
-        $data = array("nombre" => $nombre, "fechacreacion" => date("Y/m/d H:i:s"), "fechaactualizacion" => date("Y/m/d H:i:s"), "usuario_id" => 1);
+        $data = array("nombre" => $nombre, "tipo" => $tipo,"fechacreacion" => date("Y/m/d H:i:s"), "fechaactualizacion" => date("Y/m/d H:i:s"), "usuario_id" => 1);
         $this->Test_model->create($data);
         redirect(site_url("test/index"));
     }
@@ -49,9 +50,10 @@ class Test extends CI_Controller {
     function update() {
         $id = $_POST["id"];
         $nombre = $_POST["nombre"];
+        $tipo = $_POST["tipo"];
         $fechacreacion = $_POST["fechacreacion"];
         $this->load->model("Test_model", '', true);
-        $data = array("id" => (int) $id, "nombre" => $nombre, "fechacreacion" => $fechacreacion, "fechaactualizacion" => date("Y/m/d H:i:s"), "usuario_id" => 1);
+        $data = array("id" => (int) $id, "nombre" => $nombre,"tipo" => $tipo, "fechacreacion" => $fechacreacion, "fechaactualizacion" => date("Y/m/d H:i:s"), "usuario_id" => 1);
         $this->Test_model->update($data);
         redirect(site_url("test/index"));
     }

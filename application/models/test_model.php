@@ -4,6 +4,7 @@ class Test_model extends CI_Model {
         var $fechacreacion = '';
         var $fechaactualizacion = '';
         var $usuario_id = '';
+        var $tipo = '';
         
 	function __construct() {
             parent::__construct();
@@ -15,12 +16,14 @@ class Test_model extends CI_Model {
             $this->fechacreacion = $data['fechacreacion'];
             $this->fechaactualizacion = $data['fechaactualizacion'];
             $this->usuario_id = $data['usuario_id'];
+            $this->tipo = $data['tipo'];
             $this->db->insert('test', $this);
 
             return $this->db->affected_rows();
 	}
         function update($data) {
             $this->nombre = $data['nombre'];
+            $this->tipo = $data['tipo'];
             $this->fechacreacion = $data['fechacreacion'];
             $this->fechaactualizacion = $data['fechaactualizacion'];
             $this->usuario_id = $data['usuario_id'];

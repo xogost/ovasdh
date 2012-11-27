@@ -20,6 +20,6 @@
         <ol>
             <li>Ejecute el proceso de creación de test.</li>
         </ol>
-        <button type="button" class="btn btn-large btn-inverse" onclick="window.location = '<?php echo base_url("index.php/test/"); ?>';">Crear Ruta de Aprendizaje</button>
+        <button type="button" class="btn btn-large btn-inverse" onclick="window.location = '<?php echo base_url("index.php/test/"); ?>';">Crear Test</button>
     </div>
 </div>

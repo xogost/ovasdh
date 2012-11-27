@@ -16,17 +16,17 @@
                     for(i=2; i < archivos.videos.length; i++){
                         listadoDeArchivos += "<li><input type='radio' name='videos' value='" + archivos.videos[i] + "'>" + archivos.videos[i] + "</li>";
                     }
-                    $("#videos").html(listadoDeArchivos);
+                    //$("#videos").html(listadoDeArchivos);
                     listadoDeArchivos = "";
                     for(i=2; i < archivos.comic.length; i++){
-                        listadoDeArchivos += "<li><input type='radio' name='comic' value='" + archivos.comic[i] + "'>" + archivos.comic[i] + "</li>";
+                        //listadoDeArchivos += "<li><input type='radio' name='comic' value='" + archivos.comic[i] + "'>" + archivos.comic[i] + "</li>";
                     }
-                    $("#comic").html(listadoDeArchivos);
+                    //$("#comic").html(listadoDeArchivos);
                     listadoDeArchivos = "";
                     for(i=2; i < archivos.actividades.length; i++){
                         listadoDeArchivos += "<li><input type='radio' name='actividades' value='" + archivos.actividades[i] + "'>" + archivos.actividades[i] + "</li>";
                     }
-                    $("#actividades").html(listadoDeArchivos);
+                    //$("#actividades").html(listadoDeArchivos);
                 },
                 error: function(error){
                     alert(error);
@@ -39,7 +39,7 @@
                     arraytests = JSON.parse(arraytests);
                     var testhtml = "";
                     for(var testItem in arraytests){
-                        testhtml += "<li><input type='radio' name='test' value='" + arraytests[testItem].id + "'>" + arraytests[testItem].nombre + "</li>";
+                        testhtml += "<li><input type='radio' id=" + arraytests[testItem].id + " name='test' value='" + arraytests[testItem].id + "'>" + arraytests[testItem].nombre + "</li>";
                     }
                     $("#test").html(testhtml);
                 },
@@ -50,13 +50,43 @@
         });
     });
     function insertRutaAprendizaje(){
-        var dataRutaAprendizaje = {"videos":"", "comic": "", "actividades": "","test":"", "orden":""};
-        var orden="";
-        $("input[type=radio]:checked").each(function(){
-            dataRutaAprendizaje[$(this).attr("name")] = $(this).val();
-            orden += $("#orden"+$(this).attr("name")).val() + ", ";
-        });
-        dataRutaAprendizaje["orden"] = orden;
+        var dataRutaAprendizaje = {"videos":"", "comic": "", "actividades": "", "presentacion": "","test":"", "orden":""};
+        if($("#categoria").val() == "alto"){
+            dataRutaAprendizaje.videos = "alto.flv";
+            dataRutaAprendizaje.comic = "comic_alto.swf";
+            dataRutaAprendizaje.actividades = "act_alto.jclic.zip";
+            dataRutaAprendizaje.presentacion = "presalto.swf";
+            $("input[type=radio], [name=test]").each(function(){
+                if($(this).is(":checked"))
+                {
+                    dataRutaAprendizaje.test = $(this).val();
+                }
+            });
+        }else if($("#categoria").val() == "medio"){
+            dataRutaAprendizaje.videos = "medio.flv";
+            dataRutaAprendizaje.comic = "comic_medio.swf";
+            dataRutaAprendizaje.actividades = "act_medio.jclic.zip";
+            dataRutaAprendizaje.presentacion = "presmedio.swf";
+            $("input[type=radio], [name=test]").each(function(){
+                if($(this).is(":checked"))
+                {
+                    dataRutaAprendizaje.test = $(this).val();
+                }
+            });
+        }
+        else if($("#categoria").val() == "bajo"){
+            dataRutaAprendizaje.videos = "bajo.flv";
+            dataRutaAprendizaje.comic = "comic_bajo.swf";
+            dataRutaAprendizaje.actividades = "act_bajo.jclic.zip";
+            dataRutaAprendizaje.presentacion = "presbajo.swf";
+            $("input[type=radio], [name=test]").each(function(){
+                if($(this).is(":checked"))
+                {
+                    dataRutaAprendizaje.test = $(this).val();
+                }
+            });
+        }
+        dataRutaAprendizaje.orden = $("#ordenvideos").val() + "," + $("#ordencomic").val() + "," + $("#ordenactividades").val() + ",0," + $("#ordentest").val();
         $.ajax({
             url: "<?php echo base_url("index.php/rutaAprendizaje/insert"); ?>", 
             type: "POST",

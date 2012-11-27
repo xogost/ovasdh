@@ -5,6 +5,18 @@
     <form id="frmTest" action="<?php echo site_url("pregunta/insert/$id"); ?>" class="form-horizontal" method="POST">
         <legend>Agregar Nueva Pregunta</legend>
         <div class="control-group">
+            <label class="control-label" from="pregunta">Subcategoria</label>
+            <div class="controls">
+                <select id="subcategorias" name="subcategorias">
+                    <?php  
+                        foreach($arraySubcategorias->result() as $itemSubcategoria){
+                            echo "<option id='$itemSubcategoria->id' value='$itemSubcategoria->subcategoria' >".$itemSubcategoria->subcategoria."</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
             <label class="control-label" from="pregunta">Pregunta</label>
             <div class="controls">
                 <input name="pregunta" id="pregunta" type="text" placeholder="Ingrese texto aqui..." value=""/> 

@@ -6,7 +6,9 @@ class Preguntas_model extends CI_Model
         var $respuestacorrecta = '';
         var $fechacreacion = '';
         var $fechaactualizacion = '';
-        var $usuario_id = '';        
+        var $usuario_id = '';
+        var $idtest = '';
+        var $subcategoria = '';
 
         public function __construct() {
             parent::__construct();
@@ -20,6 +22,8 @@ class Preguntas_model extends CI_Model
 		$this->db->fechacreacion= $data['fechacreacion'];
 		$this->db->fechaactualizacion= $data['fechaactualizacion'];
 		$this->db->usuario_id= $data['usuario_id'];
+                $this->db->idtest= $data['idtest'];
+                $this->db->subcategoria= $data['subcategoria'];
                 
 		$this->db->insert('preguntas', $data);
 
@@ -40,6 +44,14 @@ class Preguntas_model extends CI_Model
 
 		return $query;
 	}
+        
+        function readTest($idtest)
+	{
+                $this->db->where("idtest = $idtest");
+		$query = $this->db->get('preguntas');
+
+		return $query;
+	}
 
 	function update($id, $values)
 	{
@@ -49,7 +61,7 @@ class Preguntas_model extends CI_Model
 		$this->db->fechacreacion= $values['fechacreacion'];
 		$this->db->fechaactualizacion= $values['fechaactualizacion'];
 		$this->db->usuario_id= $values['usuario_id'];
-                
+                $this->db->subcategoria= $data['subcategoria'];
 		$this->db->update('preguntas', $values, array("id" => (int)$id ));
 
 		return $this->db->affected_rows();

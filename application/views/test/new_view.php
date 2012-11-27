@@ -7,6 +7,16 @@
         <div class="control-group">
             <label class="control-label" from="inptNombre">Nombre de Test</label>
             <div class="controls">
+                <select id="tipo" name="tipo">
+                    <option value="alto">Sistema Digestivo Alto</option>
+                    <option value="medio">Sistema Digestivo Medio</option>
+                    <option value="bajo">Sistema Digestivo Bajo</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" from="inptNombre">Nombre de Test</label>
+            <div class="controls">
                 <input name="nombre" id="nombre" type="text" placeholder="Ingrese texto aqui..." value=""/> 
             </div>
         </div>
