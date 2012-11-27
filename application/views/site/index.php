@@ -1,7 +1,6 @@
-<div class="site-index"><h1>Objeto virtual de aprendizaje del sistema digestivo humano.</h1>
-
-    <p>El objetivo de este objeto virtual de aprendizaje es aprender la importancia del sistema digestivo humano, el funcionamiento de cada órgano y los cuidados que debemos tener para el buen funcionamiento de este.</p>
+<div class="site-index">
     <p>A continuacion se describen el procedimeinto para el proceso de creacion de las rutas de aprendizaje que realizan los docentes y como los estudiantes pueden ingresar a la plataforma para ejecutar el proceso de evaluación.</p>
+    <br/>
     <legend>Estudiantes</legend>
     <div class="control">
         <ol>
@@ -16,8 +15,9 @@
         </ol>
         <button type="button" class="btn btn-large btn-inverse" onclick="window.location = '<?php echo base_url("index.php/rutaAprendizaje/index"); ?>';">Crear Ruta de Aprendizaje</button>
     </div>
+    <br/>
     <div class="control">
-        <ol>
+        <ol start='2'>
             <li>Ejecute el proceso de creación de test.</li>
         </ol>
         <button type="button" class="btn btn-large btn-inverse" onclick="window.location = '<?php echo base_url("index.php/test/"); ?>';">Crear Test</button>

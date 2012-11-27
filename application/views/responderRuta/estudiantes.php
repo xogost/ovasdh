@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    var htmlTest = "";
     function ocultarRutasAprendizaje(data){
         data = data.split(',');
         var arrayEvaluacion =[]; 
@@ -13,14 +14,13 @@
             else if(i==3)
                 arrayRutaAprendizajedata.push([data[i], 0, "presentacion"]);
             else if(i==4)
-                arrayRutaAprendizajedata.push([data[i], data[8], "test"]);
+                arrayRutaAprendizajedata.push([data[i], data[9], "test"]);
             
             arrayEvaluacion.push(arrayRutaAprendizajedata);
         }
         var htmlVideo = "";
         var htmlActividad = "";
         var htmlPresentacion = "";
-        var htmlTest = "<legend>Test Evaluativo</legend>";
         var htmlcomic = "";
         for(i=0; i <arrayEvaluacion.length; i++){
             if(arrayEvaluacion[i][0][2] == "presentacion" && arrayEvaluacion[i][0][1] == 0){
@@ -30,6 +30,19 @@
                 htmlPresentacion += '<param name="quality" value="high" />';
                 htmlPresentacion += '<embed src="'+rutaPresentacion+'" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="600" height="400"></embed>';
                 htmlPresentacion += '</object>';
+            }
+            if(arrayEvaluacion[i][0][2] == "test" && arrayEvaluacion[i][0][1] == 4){
+                $.ajax({
+                    url: "<?php echo base_url("index.php/test/getTestHtml");?>",
+                    type: "GET",
+                    data: {"id": arrayEvaluacion[i][0][0]},
+                    success: function(html){
+                        htmlTest = "<legend>Test Evaluativo</legend>" + html;
+                    },
+                    error: function(error){
+                        alert("Error al generar el test seleccionado!");
+                    }
+                });
             }
             if(arrayEvaluacion[i][0][2] == "actividades" && arrayEvaluacion[i][0][1] == 1){
                 var rutaActividades = "http://clic.xtec.cat/db/jclicApplet.jsp?project=<?php echo base_url("multimedia/Actividades/"); ?>/" + arrayEvaluacion[i][0][0] + "&amp;lang=es";
@@ -50,9 +63,6 @@
                 htmlcomic += '<embed src="'+ rutaComic +'" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="600" height="400"></embed>';
                 htmlcomic += '</object>';
             }
-            else if(arrayEvaluacion[i][0][2] == "test" && arrayEvaluacion[i][0][1] == 4){
-                
-            }
         }
         
         $("#rutasAprendizaje").css("display","none");    
@@ -61,7 +71,7 @@
         $("#evaluacion").append(htmlActividad);
         $("#evaluacion").append(htmlVideo);
         $("#evaluacion").append(htmlcomic);
-        $("#evaluacion").append(htmlTest);
+        setTimeout('$("#evaluacion").append(htmlTest)', 100);
     }
 </script>
 <h1>Listado de Rutas de aprendizaje a responder</h1>

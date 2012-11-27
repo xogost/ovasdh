@@ -15,15 +15,20 @@
     <body>
         <div id="header" class="container navbar navbar-inverse navbar-static-top">
             <div class="navbar-inner">
-            <a class="brand" href="#">Aprendizaje del Sistema Digestivo Humano</a>
-            <ul class="nav">
-                <li class="active">
-                    <a href="#">Inicio</a>
-                </li>
-                <li><a href="#">Cuestionarios</a></li>
-                <li><a href="#">Preguntas</a></li>
-            </ul>
+                <a class="brand" href="#">Aprendizaje del Sistema Digestivo Humano</a>
+                <ul class="nav">
+                    <li class="active">
+                        <a href="<?php echo base_url(); ?>">Inicio</a>
+                    </li>
+                    <li><a href="<?php echo base_url("index.php/test"); ?>">Test</a></li>
+                    <li><a href="<?php echo base_url("index.php/responderRuta"); ?>">Rutas de Aprendizaje</a></li>
+                </ul>
             </div>
         </div>
         <br/>
         <div id="content">
+            <div class="site-index">
+                <h1>Objeto virtual de aprendizaje del sistema digestivo humano.</h1>
+
+                <p>El objetivo de este objeto virtual de aprendizaje es aprender la importancia del sistema digestivo humano, el funcionamiento de cada órgano y los cuidados que debemos tener para el buen funcionamiento de este.</p>
+            </div>
