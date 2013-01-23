@@ -1,8 +1,41 @@
 <script type="text/javascript">
+    $(document).ready(function(){
+    });
+    var resultadoTest=0;
+    var valorAprobacionTest = 0;
+    var arrayEvaluacion =[]; 
+    var siguienteInstrumento = 1;
+    var dataOcultar = "";
     var htmlTest = "";
+    function sumar(valor){
+        resultadoTest = resultadoTest + valor;
+    }
+    function validarResultadoTest(){
+        if(parseInt(valorAprobacionTest) == resultadoTest){
+            alert('Muy bien!, El test fue superado correctamente. \n El resultado obtenido fue ' + resultadoTest + '/' + valorAprobacionTest);
+            window.location = '<?php echo base_url("index.php/responderRuta"); ?>';
+        }
+        else{
+            if(siguienteInstrumento == 3)
+                siguienteInstrumento = 1;
+            else
+                siguienteInstrumento++;
+            $("#evaluacion").html("");
+            $("#evaluacion").html("");
+            $("#evaluacion").html("");
+            $("#evaluacion").html("");
+            htmlTest = "";
+            $("#test").html("");
+            alert('Lo sentimos!, Vuelve a intentarlo. \n Resultado obtenido: ' + resultadoTest + '/' + valorAprobacionTest);
+            ocultarRutasAprendizaje(dataOcultar);
+            resultadoTest = 0;
+            
+        }
+    }
     function ocultarRutasAprendizaje(data){
+        dataOcultar = data;
         data = data.split(',');
-        var arrayEvaluacion =[]; 
+            
         for (i = 0; i < 5; i++) {
             var arrayRutaAprendizajedata = [];
             if(i==0)
@@ -33,29 +66,31 @@
             }
             if(arrayEvaluacion[i][0][2] == "test" && arrayEvaluacion[i][0][1] == 4){
                 $.ajax({
-                    url: "<?php echo base_url("index.php/test/getTestHtml");?>",
+                    url: "<?php echo base_url("index.php/test/getTestHtml"); ?>",
                     type: "GET",
                     data: {"id": arrayEvaluacion[i][0][0]},
                     success: function(html){
                         htmlTest = "<legend>Test Evaluativo</legend>" + html;
+                        $("#test").html(htmlTest);
+                        valorAprobacionTest = $("#valtest").val();
                     },
                     error: function(error){
                         alert("Error al generar el test seleccionado!");
                     }
                 });
             }
-            if(arrayEvaluacion[i][0][2] == "actividades" && arrayEvaluacion[i][0][1] == 1){
+            if(arrayEvaluacion[i][0][2] == "actividades" && arrayEvaluacion[i][0][1] == siguienteInstrumento){
                 var rutaActividades = "http://clic.xtec.cat/db/jclicApplet.jsp?project=<?php echo base_url("multimedia/Actividades/"); ?>/" + arrayEvaluacion[i][0][0] + "&amp;lang=es";
                 htmlActividad = "<legend>Actividad</legend><iframe width='600' height='400' frameborder='0' src='" + rutaActividades + "' ></iframe><br />";
             }
-            else if(arrayEvaluacion[i][0][2] == "video" && arrayEvaluacion[i][0][1] == 1){
+            else if(arrayEvaluacion[i][0][2] == "video" && arrayEvaluacion[i][0][1] == siguienteInstrumento){
                 var rutaVideo = '<?php echo base_url("multimedia/videos/"); ?>/' + arrayEvaluacion[i][0][0];
                 htmlVideo ='<legend>Video</legend><object width="600" height="400" data="video.flv">';
                 htmlVideo += '<param name="movie" value="' + rutaVideo + '">';
                 htmlVideo += '<embed src="' + rutaVideo + '" width="600" height="400">';
                 htmlVideo += '</object>';
             }
-            else if(arrayEvaluacion[i][0][2] == "comic" && arrayEvaluacion[i][0][1] == 1){
+            else if(arrayEvaluacion[i][0][2] == "comic" && arrayEvaluacion[i][0][1] == siguienteInstrumento){
                 var rutaComic = '<?php echo base_url("multimedia/Comic/"); ?>/' + arrayEvaluacion[i][0][0];
                 htmlcomic = '<legend>Comic</legend><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="600" height="400">';
                 htmlcomic += '<param name="movie" value="'+ rutaComic +'" />';
@@ -71,7 +106,6 @@
         $("#evaluacion").append(htmlActividad);
         $("#evaluacion").append(htmlVideo);
         $("#evaluacion").append(htmlcomic);
-        setTimeout('$("#evaluacion").append(htmlTest)', 100);
     }
 </script>
 <h1>Listado de Rutas de aprendizaje a responder</h1>
@@ -86,4 +120,5 @@
 <div id="contentEvaliuacion" style="display: none;">
     <h1>Ruta de Aprendizaje</h1>
     <div id="evaluacion"></div>
+    <div id="test"></div>
 </div>

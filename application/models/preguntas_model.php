@@ -61,7 +61,7 @@ class Preguntas_model extends CI_Model
 		$this->db->fechacreacion= $values['fechacreacion'];
 		$this->db->fechaactualizacion= $values['fechaactualizacion'];
 		$this->db->usuario_id= $values['usuario_id'];
-                $this->db->subcategoria= $data['subcategoria'];
+                $this->db->subcategoria= $values['subcategoria'];
 		$this->db->update('preguntas', $values, array("id" => (int)$id ));
 
 		return $this->db->affected_rows();

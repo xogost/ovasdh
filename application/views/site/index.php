@@ -22,4 +22,11 @@
         </ol>
         <button type="button" class="btn btn-large btn-inverse" onclick="window.location = '<?php echo base_url("index.php/test/"); ?>';">Crear Test</button>
     </div>
+    <br/>
+    <div class="control">
+        <ol start='3'>
+            <li>Preguntas para examen final.</li>
+        </ol>
+        <button type="button" class="btn btn-large btn-inverse" onclick="window.location = '<?php echo base_url("index.php/pregunta/index/-1"); ?>';">Crear Preguntas para Examen Final</button>
+    </div>
 </div>

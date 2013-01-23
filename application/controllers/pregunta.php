@@ -19,7 +19,11 @@ class Pregunta extends CI_Controller {
 
     function form_new($id) {
         $categoria = $this->getCategoriaTest($id);
-        $arraySubcategorias = $this->getSubcategorias($categoria);
+        $arraySubcategorias = "";
+        if($id == "-1")
+            $arraySubcategorias = $this->getSubcategorias("final");
+        else
+            $arraySubcategorias = $this->getSubcategorias($categoria);
         $parametersView = array(
             array("view" => 'preguntas/new_view', "parameters" => array("id" => $id, 'arraySubcategorias' => $arraySubcategorias))
         );
@@ -28,12 +32,16 @@ class Pregunta extends CI_Controller {
 
     function form_update($id, $test) {
         $categoria = $this->getCategoriaTest($test);
-        $arraySubcategorias = $this->getSubcategorias($categoria);
+        $arraySubcategorias = "";
+        if($test == "-1")
+            $arraySubcategorias = $this->getSubcategorias("final");
+        else
+            $arraySubcategorias = $this->getSubcategorias($categoria);
         $this->load->model("Preguntas_model", '', true);
         $row = $this->Preguntas_model->read($id);
         $item = $row->result();
         $parametersView = array(
-            array("view" => 'preguntas/update_new', "parameters" => array("id" => $id, "test" => $test, "arraySubcategorias" => $arraySubcategorias,"pregunta" => $item[0]->pregunta == null ? "" : $item[0]->pregunta, "valor" => $item[0]->valor == null ? "" : $item[0]->valor, "respuestacorrecta" => $item[0]->respuestacorrecta == null ? "" : $item[0]->respuestacorrecta, "subcategoria" => $item[0]->subcategoria)),
+            array("view" => 'preguntas/update_new', "parameters" => array("id" => $id, "test" => $test, "arraySubcategorias" => $arraySubcategorias, "pregunta" => $item[0]->pregunta == null ? "" : $item[0]->pregunta, "valor" => $item[0]->valor == null ? "" : $item[0]->valor, "respuestacorrecta" => $item[0]->respuestacorrecta == null ? "" : $item[0]->respuestacorrecta, "subcategoria" => $item[0]->subcategoria)),
             array("view" => 'imagenes/loadImage', "parameters" => array("id" => $id, "test_id" => $test)),
         );
         site::loadView($parametersView);
@@ -61,17 +69,18 @@ class Pregunta extends CI_Controller {
         $this->Preguntas_model->update($id, $data);
         redirect(site_url("pregunta/index/$idtest"));
     }
-    function getSubcategorias($categoria){
+
+    function getSubcategorias($categoria) {
         $this->load->model("Subcategorias_model", "Subcategorias", true);
         $subcategoriasArray = $this->Subcategorias->getsubcategorias($categoria);
         return $subcategoriasArray;
     }
-    
-    function getCategoriaTest($id){
+
+    function getCategoriaTest($id) {
         $this->load->model("Test_model", "test", true);
         $testData = $this->test->selectOne($id);
         $categoria = "";
-        foreach($testData->result() as $itemTest){
+        foreach ($testData->result() as $itemTest) {
             $categoria = $itemTest->tipo;
         }
         return $categoria;

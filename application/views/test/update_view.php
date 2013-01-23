@@ -26,6 +26,12 @@ $(document).ready(function() {
                 <input name="nombre" id="nombre" type="text" placeholder="<?php echo $placeholder; ?>" value="<?php echo $nombre; ?>"/> 
             </div>
         </div>
+        <div class="control-group">
+            <label class="control-label" from="valor">Valor de aprobación</label>
+            <div class="controls">
+                <input name="valor" id="valor" type="text" placeholder="Ingrese texto aqui..." value="<?php echo $valor;?>"/> 
+            </div>
+        </div>
         <div>
             <div class="control-group">
                 <div class="controls">

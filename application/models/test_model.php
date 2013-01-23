@@ -1,6 +1,7 @@
 <?php
 class Test_model extends CI_Model {
         var $nombre = '';
+        var $valor = '';
         var $fechacreacion = '';
         var $fechaactualizacion = '';
         var $usuario_id = '';
@@ -13,6 +14,7 @@ class Test_model extends CI_Model {
 	function create($data)
 	{
             $this->nombre = $data['nombre'];
+            $this->valor = $data['valor'];
             $this->fechacreacion = $data['fechacreacion'];
             $this->fechaactualizacion = $data['fechaactualizacion'];
             $this->usuario_id = $data['usuario_id'];
@@ -23,6 +25,7 @@ class Test_model extends CI_Model {
 	}
         function update($data) {
             $this->nombre = $data['nombre'];
+            $this->valor = $data['valor'];
             $this->tipo = $data['tipo'];
             $this->fechacreacion = $data['fechacreacion'];
             $this->fechaactualizacion = $data['fechaactualizacion'];
