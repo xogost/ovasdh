@@ -22,6 +22,7 @@
                     </li>
                     <li><a href="<?php echo base_url("index.php/test"); ?>">Test</a></li>
                     <li><a href="<?php echo base_url("index.php/responderRuta"); ?>">Rutas de Aprendizaje</a></li>
+                    <li><a href="<?php echo base_url("index.php/examenfinal"); ?>">Examen Final</a></li>
                 </ul>
             </div>
         </div>

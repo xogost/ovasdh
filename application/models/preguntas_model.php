@@ -52,6 +52,12 @@ class Preguntas_model extends CI_Model
 
 		return $query;
 	}
+        
+        function readFinalQuestionary($subcategoria)
+        {
+            $query = $this->db->query('SELECT * FROM preguntas WHERE idtest = \'-1\' AND subcategoria = \'' . $subcategoria . '\' ORDER BY RAND() LIMIT 2');
+            return $query;
+        }
 
 	function update($id, $values)
 	{

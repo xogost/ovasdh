@@ -10,5 +10,9 @@ class Subcategorias_model extends CI_Model {
         $this->db->where("sistema_digestivo = '$sistemaDigestivo'");
         return $this->db->get('subcategorias');
     }
+    public function getsubcategoriasFinalQuestionary() {
+        $this->db->where("sistema_digestivo = 'final'");
+        return $this->db->get('subcategorias');
+    }
 
 }
