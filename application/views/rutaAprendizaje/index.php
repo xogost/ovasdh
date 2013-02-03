@@ -86,7 +86,7 @@
                 }
             });
         }
-        dataRutaAprendizaje.orden = $("#ordenvideos").val() + "," + $("#ordencomic").val() + "," + $("#ordenactividades").val() + ",0," + $("#ordentest").val();
+        dataRutaAprendizaje.orden = $("#ordenvideos").val() + "," + $("#ordencomic").val() + "," + "0," + $("#ordenactividades").val() + "," + $("#ordentest").val();
         $.ajax({
             url: "<?php echo base_url("index.php/rutaAprendizaje/insert"); ?>", 
             type: "POST",

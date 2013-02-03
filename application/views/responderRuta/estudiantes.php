@@ -1,3 +1,6 @@
+<style>
+    #evaluacion{ width: 100%; text-align: center;}
+</style>
 <script type="text/javascript">
     $(document).ready(function(){
     });
@@ -56,13 +59,9 @@
         var htmlPresentacion = "";
         var htmlcomic = "";
         for(i=0; i <arrayEvaluacion.length; i++){
-            if(arrayEvaluacion[i][0][2] == "presentacion" && arrayEvaluacion[i][0][1] == 0){
-                var rutaPresentacion = "<?php echo base_url("multimedia/Presentaciones/"); ?>/" + arrayEvaluacion[i][0][0];
-                htmlPresentacion = '<legend>Presentación</legend><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="600" height="400">';
-                htmlPresentacion += '<param name="movie" value="'+rutaPresentacion+'" />';
-                htmlPresentacion += '<param name="quality" value="high" />';
-                htmlPresentacion += '<embed src="'+rutaPresentacion+'" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="600" height="400"></embed>';
-                htmlPresentacion += '</object>';
+            if(arrayEvaluacion[i][0][2] == "actividades" && arrayEvaluacion[i][0][1] == 0){
+                var rutaActividades = "http://clic.xtec.cat/db/jclicApplet.jsp?project=<?php echo base_url("multimedia/Actividades/"); ?>/" + arrayEvaluacion[i][0][0] + "&amp;lang=es";
+                htmlActividad = "<legend>Actividad</legend><iframe width='600' height='400' frameborder='0' src='" + rutaActividades + "' ></iframe><br />";
             }
             if(arrayEvaluacion[i][0][2] == "test" && arrayEvaluacion[i][0][1] == 4){
                 $.ajax({
@@ -79,9 +78,13 @@
                     }
                 });
             }
-            if(arrayEvaluacion[i][0][2] == "actividades" && arrayEvaluacion[i][0][1] == siguienteInstrumento){
-                var rutaActividades = "http://clic.xtec.cat/db/jclicApplet.jsp?project=<?php echo base_url("multimedia/Actividades/"); ?>/" + arrayEvaluacion[i][0][0] + "&amp;lang=es";
-                htmlActividad = "<legend>Actividad</legend><iframe width='600' height='400' frameborder='0' src='" + rutaActividades + "' ></iframe><br />";
+            if(arrayEvaluacion[i][0][2] == "presentacion" && arrayEvaluacion[i][0][1] == siguienteInstrumento){
+                var rutaPresentacion = "<?php echo base_url("multimedia/Presentaciones/"); ?>/" + arrayEvaluacion[i][0][0];
+                htmlPresentacion = '<legend>Presentación</legend><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="600" height="400">';
+                htmlPresentacion += '<param name="movie" value="'+rutaPresentacion+'" />';
+                htmlPresentacion += '<param name="quality" value="high" />';
+                htmlPresentacion += '<embed src="'+rutaPresentacion+'" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="600" height="400"></embed>';
+                htmlPresentacion += '</object>';
             }
             else if(arrayEvaluacion[i][0][2] == "video" && arrayEvaluacion[i][0][1] == siguienteInstrumento){
                 var rutaVideo = '<?php echo base_url("multimedia/videos/"); ?>/' + arrayEvaluacion[i][0][0];
@@ -103,17 +106,17 @@
         $("#rutasAprendizaje").css("display","none");    
         $("#contentEvaliuacion").css("display","block");
         $("#evaluacion").append(htmlPresentacion);
-        $("#evaluacion").append(htmlActividad);
         $("#evaluacion").append(htmlVideo);
         $("#evaluacion").append(htmlcomic);
+        $("#evaluacion").append(htmlActividad);
     }
 </script>
 <h1>Listado de Rutas de aprendizaje a responder</h1>
 <table id="rutasAprendizaje" class="table">
     <?php
     foreach ($arrauRutasAprendizaje as $arrayItem) {
-        $registroRutaAprendizaje = "<tr><td>%s</td><td>%s</td><td><input type='button' class='btn btn-large btn-inverse' onclick='ocultarRutasAprendizaje(\"%s\");' value='Realizar Evaluación'/></td></tr>";
-        echo sprintf($registroRutaAprendizaje, $arrayItem->nombre, $arrayItem->data, $arrayItem->data);
+        $registroRutaAprendizaje = "<tr><td>%s</td><td><input type='button' class='btn btn-large btn-inverse' onclick='ocultarRutasAprendizaje(\"%s\");' value='Realizar Evaluación'/></td></tr>";
+        echo sprintf($registroRutaAprendizaje, strtoupper($arrayItem->nombre), $arrayItem->data);
     }
     ?>
 </table>

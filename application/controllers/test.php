@@ -43,7 +43,7 @@ class Test extends CI_Controller {
         $valor = $_POST["valor"];
         $tipo = $_POST["tipo"];
         $this->load->model("Test_model", '', true);
-        $data = array("nombre" => $nombre, "valor"=> $valor, "tipo" => $tipo, "fechacreacion" => date("Y/m/d H:i:s"), "fechaactualizacion" => date("Y/m/d H:i:s"), "usuario_id" => 1);
+        $data = array("nombre" => $nombre, "valor" => $valor, "tipo" => $tipo, "fechacreacion" => date("Y/m/d H:i:s"), "fechaactualizacion" => date("Y/m/d H:i:s"), "usuario_id" => 1);
         $this->Test_model->create($data);
         redirect(site_url("test/index"));
     }
@@ -83,18 +83,22 @@ class Test extends CI_Controller {
             $valorRespuestaCorrecta = $itemPregunta->valor;
             $arrayImagenes = $this->Imagenes->read($itemPregunta->id);
             foreach ($arrayImagenes->result() as $itemImagen) {
-                $textoPregunta = str_replace("[".$itemImagen->nombre."]", "<img width='70px' height='70px' class='img-polaroid' src='". base_url("files") ."/$itemImagen->ruta'/>", $textoPregunta);
+                $textoPregunta = str_replace("[" . $itemImagen->nombre . "]", "<img width='70px' height='70px' class='img-polaroid' src='" . base_url("files") . "/$itemImagen->ruta'/>", $textoPregunta);
             }
             $html .= $textoPregunta;
             $arrayRespuestas = $this->Respuestas->read($itemPregunta->id);
             $html .= "<ol type='A' style='font-weight: bold;'>";
             $consecutivoRespuesta = 1;
+            $cantidadPreguntas = 0;
             foreach ($arrayRespuestas->result() as $itemRespuesta) {
-                $funcionJavaScriptSuma = "";
-                if($consecutivoRespuesta == $respuestaCorrecta)
-                    $funcionJavaScriptSuma = "onclick='sumar($valorRespuestaCorrecta);'";
-                $html .= "<li><label for='radio$itemRespuesta->id'>radio$itemRespuesta->texto</label><input name='preg$itemPregunta->id' type='radio' $funcionJavaScriptSuma id='radio$itemRespuesta->id' value='$itemRespuesta->id'/></li>";
-                $consecutivoRespuesta++;
+                if ($cantidadPreguntas <= 3) {
+                    $funcionJavaScriptSuma = "";
+                    if ($consecutivoRespuesta == $respuestaCorrecta)
+                        $funcionJavaScriptSuma = "onclick='sumar($valorRespuestaCorrecta);'";
+                    $html .= "<li><label for='radio$itemRespuesta->id'>$itemRespuesta->texto</label><input name='preg$itemPregunta->id' type='radio' $funcionJavaScriptSuma id='radio$itemRespuesta->id' value='$itemRespuesta->id'/></li>";
+                    $consecutivoRespuesta++;
+                }
+                $cantidadPreguntas++;
             }
             $html .= "</ol></li>";
         }
