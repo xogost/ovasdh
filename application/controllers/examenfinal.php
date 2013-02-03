@@ -32,7 +32,7 @@ class examenfinal extends CI_Controller {
                     $funcionJavaScriptSuma = "";
                     if ($consecutivoRespuesta == $respuestaCorrecta)
                         $funcionJavaScriptSuma = "onclick='sumar($valorRespuestaCorrecta);'";
-                    $html .= "<li><label for='radio$itemRespuesta->id'>radio$itemRespuesta->texto</label><input name='preg$itemPregunta->id' type='radio' $funcionJavaScriptSuma id='radio$itemRespuesta->id' value='$itemRespuesta->id'/></li>";
+                    $html .= "<li><label for='radio$itemRespuesta->id'>$itemRespuesta->texto</label><input name='preg$itemPregunta->id' type='radio' $funcionJavaScriptSuma id='radio$itemRespuesta->id' value='$itemRespuesta->id'/></li>";
                     $consecutivoRespuesta++;
                 }
                 $html .= "</ol></li>";
