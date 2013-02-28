@@ -46,9 +46,9 @@
             else if(i==1)
                 arrayRutaAprendizajedata.push([data[i], data[6], "comic"]);
             else if(i==2)
-                arrayRutaAprendizajedata.push([data[i], data[7], "actividades"]);
+                arrayRutaAprendizajedata.push([data[i], 0, "actividades"]);
             else if(i==3)
-                arrayRutaAprendizajedata.push([data[i], 0, "presentacion"]);
+                arrayRutaAprendizajedata.push([data[i], data[8], "presentacion"]);
             else if(i==4)
                 arrayRutaAprendizajedata.push([data[i], data[9], "test"]);
             
@@ -87,11 +87,13 @@
                 htmlPresentacion += '</object>';
             }
             else if(arrayEvaluacion[i][0][2] == "video" && arrayEvaluacion[i][0][1] == siguienteInstrumento){
-                var rutaVideo = '<?php echo base_url("multimedia/videos/"); ?>/' + arrayEvaluacion[i][0][0];
-                htmlVideo ='<legend>Video</legend><object width="600" height="400" data="video.flv">';
-                htmlVideo += '<param name="movie" value="' + rutaVideo + '">';
-                htmlVideo += '<embed src="' + rutaVideo + '" width="600" height="400">';
-                htmlVideo += '</object>';
+                var nombreVideo = arrayEvaluacion[i][0][0];                
+                if(nombreVideo == "alto.flv")
+                    htmlVideo = '<iframe width="420" height="315" src="http://www.youtube.com/embed/nz2Xx5jtXRQ" frameborder="0" allowfullscreen></iframe>';
+                else if(nombreVideo == "medio.flv")
+                    htmlVideo == '<iframe width="420" height="315" src="http://www.youtube.com/embed/xDDJVpPJjkk" frameborder="0" allowfullscreen></iframe>';
+                else if(nombreVideo == "bajo.flv")
+                    htmlVideo == '<iframe width="420" height="315" src="http://www.youtube.com/embed/R76OAk0FM5Q" frameborder="0" allowfullscreen></iframe>';
             }
             else if(arrayEvaluacion[i][0][2] == "comic" && arrayEvaluacion[i][0][1] == siguienteInstrumento){
                 var rutaComic = '<?php echo base_url("multimedia/Comic/"); ?>/' + arrayEvaluacion[i][0][0];
