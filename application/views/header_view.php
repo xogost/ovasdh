@@ -23,6 +23,7 @@
                     <li><a href="<?php echo base_url("index.php/test"); ?>">Test</a></li>
                     <li><a href="<?php echo base_url("index.php/responderRuta"); ?>">Rutas de Aprendizaje</a></li>
                     <li><a href="<?php echo base_url("index.php/examenfinal"); ?>">Examen Final</a></li>
+                    <li><a href="<?php echo site_url("site/logout"); ?>">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div>

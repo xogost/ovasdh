@@ -6,7 +6,9 @@ if (!defined('BASEPATH'))
 class Site extends CI_Controller {
 
     function index() {
-        if (isset($_SESSION["userid"])) {
+        $this->load->library('session');
+        $userid = $this->session->userdata("userid");
+        if ($userid!="") {
             $this->load->view('header_view');
             $this->load->view('site/index');
         } else {
@@ -24,25 +26,30 @@ class Site extends CI_Controller {
     }
 
     function login() {
+        $this->load->library('session');
         $username = $_POST["username"];
         $password = $_POST["password"];
 
         $this->load->model("usuarios_model", "Usuarios", true);
         $user = $this->Usuarios->login($username, $password);
         $userData = $user->result();
-        
-        if(isset($userData[0]->id)){
+
+        if (isset($userData[0]->id)) {
             $this->load->view('header_view');
             $this->load->view('site/index');
-            $_SESSION["userid"] = $userData[0]->id;
-            $_SESSION["username"] = $userData[0]->username;
-        }else{
+            $newUserData = array("userid" => $userData[0]->id, "username" => $userData[0]->username);
+            $this->session->set_userdata($newUserData);
+        } else {
             $this->load->view('header_view');
             $this->load->view('login/login');
         }
-        
-        
-        
+    }
+
+    function logout() {
+        $this->load->library('session');
+        $this->session->sess_destroy();
+        $this->load->view('header_view');
+        $this->load->view('login/login');
     }
 
 }
