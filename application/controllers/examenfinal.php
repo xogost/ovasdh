@@ -14,12 +14,11 @@ class examenfinal extends CI_Controller {
         $this->load->model("Imagenes_model", 'Imagenes', true);
         $html = "<ol>";
         $subcategorias = $this->Subcategorias->getsubcategoriasFinalQuestionary();
-        foreach($subcategorias->result() as $subcategoria) {
+        foreach ($subcategorias->result() as $subcategoria) {
             $dataTest = $this->Preguntas->readFinalQuestionary($subcategoria->subcategoria);
             foreach ($dataTest->result() as $itemPregunta) {
                 $textoPregunta = "<li><p>$itemPregunta->pregunta:</p>";
                 $respuestaCorrecta = $itemPregunta->respuestacorrecta;
-                $valorRespuestaCorrecta = $itemPregunta->valor;
                 $arrayImagenes = $this->Imagenes->read($itemPregunta->id);
                 foreach ($arrayImagenes->result() as $itemImagen) {
                     $textoPregunta = str_replace("[" . $itemImagen->nombre . "]", "<img width='70px' height='70px' class='img-polaroid' src='" . base_url("files") . "/$itemImagen->ruta'/>", $textoPregunta);
@@ -29,21 +28,41 @@ class examenfinal extends CI_Controller {
                 $html .= "<ol type='A' style='font-weight: bold;'>";
                 $consecutivoRespuesta = 1;
                 foreach ($arrayRespuestas->result() as $itemRespuesta) {
-                    $funcionJavaScriptSuma = "";
-                    if ($consecutivoRespuesta == $respuestaCorrecta)
-                        $funcionJavaScriptSuma = "onclick='sumar($valorRespuestaCorrecta);'";
-                    $html .= "<li><label for='radio$itemRespuesta->id'>$itemRespuesta->texto</label><input name='preg$itemPregunta->id' type='radio' $funcionJavaScriptSuma id='radio$itemRespuesta->id' value='$itemRespuesta->id'/></li>";
-                    $consecutivoRespuesta++;
+                    if ($consecutivoRespuesta <= 4) {
+                        $funcionJavaScriptSuma = 0;
+                        if ($consecutivoRespuesta == $respuestaCorrecta)
+                            $funcionJavaScriptSuma = 1;
+                        $subcategoriaTexto = str_replace(" ", "_", $subcategoria->subcategoria);
+                        $html .= "<li><label for='radio$itemRespuesta->id'>$itemRespuesta->texto</label><input class='". $subcategoriaTexto ."' name='preg$itemPregunta->id' type='radio' correcta='$funcionJavaScriptSuma' id='radio$itemRespuesta->id' value='$itemRespuesta->id'/></li>";
+                        $consecutivoRespuesta++;
+                    }
                 }
                 $html .= "</ol></li>";
             }
         }
-        $html .= "</ol><br/><button class='btn btn-large btn-inverse' onclick=\"alert('El examen final se envió correctamente.');\">Guardar y Enviar</button>";
-        $parameters = array('html' => $html);
+        $html .= "</ol><br/><button id='finexamen' class='btn btn-large btn-inverse' onclick=\"alert('El examen final se envió correctamente.');\">Guardar y Enviar</button>";
+        $this->load->library('session');
+        $username = $this->session->userdata("username");
+        $parameters = array('html' => $html, 'subcategorias' => json_encode($subcategorias->result()), 'user'=> $username);
         $parametersView = array(
             array("view" => 'examenfinal/index', "parameters" => $parameters)
         );
         site::loadView($parametersView);
+    }
+    
+    function almacenarExamenFinal(){
+        $username = $_POST["username"];
+        $Subcategorias  = $_POST["arraySubcategorias"];
+        $Resultados = $_POST["arrayResultados"];
+        $this->load->model("Respuestas_model", 'Respuestas', true);
+        $arraySubcategorias = split(',',$Subcategorias);
+        $arrayResultados = split(',',$Resultados);
+        $fechacreacion = date('d/m/y H:m:s');
+        echo $fechacreacion;
+        for($item = 0;$item < count($arraySubcategorias);$item++){
+            $this->Respuestas->insertResultadosRespuestas($username, $arraySubcategorias[$item], $arrayResultados[$item], $fechacreacion);   
+        }
+        return "true";
     }
 
 }

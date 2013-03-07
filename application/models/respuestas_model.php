@@ -34,5 +34,10 @@ class Respuestas_model extends CI_Model {
 
         return $this->db->affected_rows();
     }
+    
+    function insertResultadosRespuestas($username, $subcategoria, $resultado, $fechacreacion){
+        $this->db->query("INSERT INTO resultados_examen_final (username,subcategoria,resultado,fechacreacion) VALUES ('$username', '$subcategoria', '$resultado', '$fechacreacion');");
+        return true;
+    }
 
 }
