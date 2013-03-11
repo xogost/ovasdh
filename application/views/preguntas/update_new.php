@@ -4,6 +4,7 @@
     $(document).ready(function(){
         textPregunta = $("#prevPregunta").html();
         $("#subcategorias").val("<?php echo $subcategoria; ?>");
+        $("#respuestacorrecta").val("<?php echo $respuestacorrecta; ?>");
     });
     function prev(){
         for (var item in arrayImagenes) {
@@ -13,6 +14,10 @@
         $("#prevPregunta").html(textPregunta);
     }
 </script>
+<style type="text/css">
+    #contentTest { width: 49%; float: left;}
+    #modRespuestas { width: 49%; float: right; border-left: 2px dashed #969696; padding: 0px 10px 0 10px;}
+</style>
 <div id="contentTest">
     <h1>Administracion de Test</h1>
     <p class="lead">Ingresa la información requerida para los campos disponibles, y genera una pregunta completa luego de terminar el proceso.</p>
@@ -47,7 +52,7 @@
         <div class="control-group">
             <label class="control-label" from="respuestacorrecta">Respuesta Correcta</label>
             <div class="controls">
-                <input name="respuestacorrecta" id="respuestacorrecta" type="text" placeholder="Ingrese texto aqui..." value="<?php echo $respuestacorrecta; ?>"/> 
+                <select name="respuestacorrecta" id="respuestacorrecta"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select> 
             </div>
         </div>
         <div>

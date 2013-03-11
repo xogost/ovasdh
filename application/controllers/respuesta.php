@@ -5,7 +5,13 @@ if (!defined('BASEPATH'))
 
 class Respuesta extends CI_Controller {
 
-    function agregar($pregunta_id, $respuesta1, $respuesta2, $respuesta3, $respuesta4, $action) {
+    function agregar() {
+        $pregunta_id = $_POST["pregunta_id"];
+        $respuesta1 = $_POST["respuesta1"];
+        $respuesta2 = $_POST["respuesta2"]; 
+        $respuesta3 = $_POST["respuesta3"];
+        $respuesta4 = $_POST["respuesta4"]; 
+        $action = $_POST["action"];
         $this->load->model('Respuestas_model', '', true);
         switch ($action) {
             case "add":

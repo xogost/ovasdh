@@ -110,16 +110,16 @@
     </select>
     <legend>Comics Correspondientes a la categoria seleccionada.</legend>
     <ul id="comic"></ul>
-    <div style="clear: both;">* Orden: <input id="ordencomic" type="text" value=""/></div>
+    <div style="clear: both;">* Orden: <select id="ordencomic"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
     <legend>Videos Correspondientes a la categoria seleccionada.</legend>
     <ul id="videos"></ul>
-    <div style="clear: both;">* Orden: <input id="ordenvideos" type="text" value=""/></div>
+    <div style="clear: both;">* Orden: <select id="ordenvideos" ><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
     <legend>Actividades Correspondientes a la categoria seleccionada.</legend>
     <ul id="actividades"></ul>
-    <div style="clear: both;">* Orden: <input id="ordenactividades" type="text" value=""/></div>
+    <div style="clear: both;">* Orden: <select id="ordenactividades" ><option value="1">1</option><option value="2">2</option><option value="3">3</option></select> </div>
     <legend>Tests Correspondientes a la categoria seleccionada.</legend>
     <ul id="test"></ul>
-    <div style="clear: both;">* Orden: <input id="ordentest" type="text" value=""/></div>
+    <div style="clear: both;">* Orden: <select id="ordentest" ><option value="4">4</option></select></div>
     <input type="button" class="btn btn-large btn-inverse btnMe" onclick="insertRutaAprendizaje();" value="Crear Ruta de Aprendizaje"/>
 </div>
 

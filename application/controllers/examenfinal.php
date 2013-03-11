@@ -64,5 +64,29 @@ class examenfinal extends CI_Controller {
         }
         return "true";
     }
+    function verResultadosFinalesView(){
+        
+        $this->load->model("Respuestas_model", 'respuestas', true);
+        $usersCol = $this->respuestas->consultarUsuarios();
+        $htmlUsers = "";
+        foreach ($usersCol->result() as $item){
+            $htmlUsers .= "<option value='$item->username'>$item->username</option>";
+        }
+        $parameters = array('users' => $htmlUsers);
+         $parametersView = array(
+            array("view" => 'examenfinal/resultados', "parameters" => $parameters)
+        );
+        site::loadView($parametersView);
+    }
+    function verResultadosFinales(){
+        $this->load->model("Respuestas_model", 'respuestas', true);
+        $return = "";
+        $username = $_POST["userid"];
+        $usersCol = $this->respuestas->consultarResultadosFinal($username);
+        foreach ($usersCol->result() as $item){
+            $return .= "<tr><td>$item->subcategoria</td><td>$item->resultado</td></tr>";
+        }
+        echo $return;
+    }
 
 }

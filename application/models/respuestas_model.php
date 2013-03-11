@@ -39,5 +39,13 @@ class Respuestas_model extends CI_Model {
         $this->db->query("INSERT INTO resultados_examen_final (username,subcategoria,resultado,fechacreacion) VALUES ('$username', '$subcategoria', '$resultado', '$fechacreacion');");
         return true;
     }
+    
+    function consultarUsuarios(){
+        return $this->db->query("SELECT DISTINCT(username) FROM resultados_examen_final");
+    }
+    
+    function consultarResultadosFinal($username){
+        return $this->db->query("SELECT subcategoria, resultado FROM cuestionario.resultados_examen_final WHERE username = '$username'");
+    }
 
 }
