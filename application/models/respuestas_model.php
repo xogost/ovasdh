@@ -40,6 +40,12 @@ class Respuestas_model extends CI_Model {
         return true;
     }
     
+    function insertResultadosTest($username, $idtest, $intentosfallidos)
+    {
+        $this->db->query("INSERT INTO resultados_test (username, idtest, intentosfallidos) VALUES ('$username', '$idtest', '$intentosfallidos')");
+        return true;
+    }
+    
     function consultarUsuarios(){
         return $this->db->query("SELECT DISTINCT(username) FROM resultados_examen_final");
     }

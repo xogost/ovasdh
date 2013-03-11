@@ -40,7 +40,7 @@ class examenfinal extends CI_Controller {
                 $html .= "</ol></li>";
             }
         }
-        $html .= "</ol><br/><button id='finexamen' class='btn btn-large btn-inverse' onclick=\"alert('El examen final se envió correctamente.');\">Guardar y Enviar</button>";
+        $html .= "</ol><br/><button id='finexamen' class='btn btn-large btn-inverse'>Guardar y Enviar</button>";
         $this->load->library('session');
         $username = $this->session->userdata("username");
         $parameters = array('html' => $html, 'subcategorias' => json_encode($subcategorias->result()), 'user'=> $username);

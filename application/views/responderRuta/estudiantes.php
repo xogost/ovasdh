@@ -8,6 +8,7 @@
     var valorAprobacionTest = 0;
     var arrayEvaluacion =[]; 
     var siguienteInstrumento = 1;
+    var intentosFallidos = 0;
     var dataOcultar = "";
     var htmlTest = "";
     function sumar(valor){
@@ -16,13 +17,25 @@
     function validarResultadoTest(){
         if(parseInt(valorAprobacionTest) == resultadoTest){
             alert('Muy bien!, El test fue superado correctamente. \n El resultado obtenido fue ' + resultadoTest + '/' + valorAprobacionTest);
-            window.location = '<?php echo base_url("index.php/responderRuta"); ?>';
+            $.ajax({
+                url: "<?php echo site_url("test/saveResultTest"); ?>",
+                type: "POST",
+                data: {"testid": arrayEvaluacion[4][0][0].toString() , "intentos": intentosFallidos },
+                success: function(){
+                    alert("Los resultados se almacenaron correctamente.");
+                    intentosFallidos = 0;
+                    window.location = '<?php echo base_url("index.php/responderRuta"); ?>';
+                }
+                
+            });
         }
         else{
             if(siguienteInstrumento == 3)
                 siguienteInstrumento = 1;
-            else
+            else{
                 siguienteInstrumento++;
+                intentosFallidos++;
+            }
             $("#evaluacion").html("");
             $("#evaluacion").html("");
             $("#evaluacion").html("");
