@@ -23,5 +23,13 @@ class RutaAprendizaje_model extends CI_Model {
             $query = $this->db->get_where('rutaaprendizaje', array("id" => $id));
             return $query;
         }
+        
+        function delete($id)
+	{
+            $this->db->where("id = $id");
+            $this->db->delete('rutaaprendizaje');
+
+            return $this->db->affected_rows();
+	}
 
 }

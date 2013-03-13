@@ -85,6 +85,13 @@ class Pregunta extends CI_Controller {
         }
         return $categoria;
     }
+    
+    function eliminar(){
+        $id_pregunta = $_POST["idpregunta"];
+        $this->load->model("preguntas_model","Preguntas", True);
+        $this->Preguntas->delete($id_pregunta);
+        echo true;
+    }
 
 }
 

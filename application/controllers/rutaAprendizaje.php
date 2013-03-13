@@ -17,7 +17,7 @@ class rutaAprendizaje extends CI_Controller {
         try {
             $arrayFlujoRutaAprendizaje = $_POST["data"];
             $this->load->model("RutaAprendizaje_model", "rutaAprendizaje", true);
-            $data = array("nombre" => $_POST["nombre"], "data" => implode(',',$arrayFlujoRutaAprendizaje), "fecha_creacion" => "NOW()", "usuario_id" => 1);
+            $data = array("nombre" => $_POST["nombre"], "data" => implode(',', $arrayFlujoRutaAprendizaje), "fecha_creacion" => "NOW()", "usuario_id" => 1);
             $this->rutaAprendizaje->create($data);
             echo "La ruta de aprendizaje se almacenó correctamente.";
         } catch (Exception $e) {
@@ -55,6 +55,17 @@ class rutaAprendizaje extends CI_Controller {
         }
         $arrayFilesToReturn = array("videos" => $arrayVideos, "comic" => $arrayComic, "actividades" => $arrayActividades);
         echo json_encode($arrayFilesToReturn);
+    }
+
+    function eliminar() {
+        $this->load->library('session');
+        if ($this->session->userdata("role_id") == 3) {
+            $id_ruta = $_POST["idruta"];
+            $this->load->model("rutaaprendizaje_model", "ruta", True);
+            $this->ruta->delete($id_ruta);
+            echo true;
+        }else
+            echo false;
     }
 
 }

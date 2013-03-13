@@ -3,6 +3,21 @@
 </style>
 <script type="text/javascript">
     $(document).ready(function(){
+        $(".deleteruta").click(function(){
+            $.ajax({
+                url: "<?php echo site_url("rutaAprendizaje/eliminar"); ?>",
+                type: "POST",
+                data: {"idruta": $(this).attr("ruta")},
+                success: function(result){
+                    if(result == 1){
+                        alert("La ruta se eliminó correctamente.");
+                        location.reload();
+                    }
+                    else
+                        alert("El rol asignado a su usuario no puede realizár esta operación.");
+                }
+            });
+        });
     });
     var resultadoTest=0;
     var valorAprobacionTest = 0;
@@ -129,13 +144,20 @@
     }
 </script>
 <h1>Listado de Rutas de aprendizaje a responder</h1>
-<table id="rutasAprendizaje" class="table">
-    <?php
-    foreach ($arrauRutasAprendizaje as $arrayItem) {
-        $registroRutaAprendizaje = "<tr><td>%s</td><td><input type='button' class='btn btn-large btn-inverse' onclick='ocultarRutasAprendizaje(\"%s\");' value='Realizar Evaluación'/></td></tr>";
-        echo sprintf($registroRutaAprendizaje, strtoupper($arrayItem->nombre), $arrayItem->data);
-    }
-    ?>
+<table id="rutasAprendizaje" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>EVALUACIÓN</th> <th>SELECCIONAR</th> <th>ELIMINAR</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        foreach ($arrauRutasAprendizaje as $arrayItem) {
+            $registroRutaAprendizaje = "<tr><td>%s</td><td><input type='button' class='btn btn-large btn-inverse' onclick='ocultarRutasAprendizaje(\"%s\");' value='Realizar Evaluación'/></td><td><button id='del$arrayItem->id' class='btn btn-danger deleteruta' ruta='$arrayItem->id'>Eliminar Ruta de Aprendizaje</button></td></tr>";
+            echo sprintf($registroRutaAprendizaje, strtoupper($arrayItem->nombre), $arrayItem->data);
+        }
+        ?>
+    </tbody>
 </table>
 <div id="contentEvaliuacion" style="display: none;">
     <h1>Ruta de Aprendizaje</h1>
