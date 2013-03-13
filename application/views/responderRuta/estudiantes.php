@@ -77,19 +77,21 @@
                 htmlActividad = "<legend>Actividad</legend><iframe width='600' height='400' frameborder='0' src='" + rutaActividades + "' ></iframe><br />";
             }
             if(arrayEvaluacion[i][0][2] == "test" && arrayEvaluacion[i][0][1] == 4){
-                $.ajax({
-                    url: "<?php echo base_url("index.php/test/getTestHtml"); ?>",
-                    type: "GET",
-                    data: {"id": arrayEvaluacion[i][0][0]},
-                    success: function(html){
-                        htmlTest = "<legend>Test Evaluativo</legend>" + html;
-                        $("#test").html(htmlTest);
-                        valorAprobacionTest = $("#valtest").val();
-                    },
-                    error: function(error){
-                        alert("Error al generar el test seleccionado!");
-                    }
-                });
+                if(arrayEvaluacion[i][0][0] != ""){
+                    $.ajax({
+                        url: "<?php echo base_url("index.php/test/getTestHtml"); ?>",
+                        type: "GET",
+                        data: {"id": arrayEvaluacion[i][0][0]},
+                        success: function(html){
+                            htmlTest = "<legend>Test Evaluativo</legend>" + html;
+                            $("#test").html(htmlTest);
+                            valorAprobacionTest = $("#valtest").val();
+                        },
+                        error: function(error){
+                            alert("Error al generar el test seleccionado!");
+                        }
+                    });
+                }
             }
             if(arrayEvaluacion[i][0][2] == "presentacion" && arrayEvaluacion[i][0][1] == siguienteInstrumento){
                 var rutaPresentacion = "<?php echo base_url("multimedia/Presentaciones/"); ?>/" + arrayEvaluacion[i][0][0];
