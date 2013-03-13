@@ -104,9 +104,9 @@
                 if(nombreVideo == "alto.flv")
                     htmlVideo = '<iframe width="420" height="315" src="http://www.youtube.com/embed/nz2Xx5jtXRQ" frameborder="0" allowfullscreen></iframe>';
                 else if(nombreVideo == "medio.flv")
-                    htmlVideo == '<iframe width="420" height="315" src="http://www.youtube.com/embed/xDDJVpPJjkk" frameborder="0" allowfullscreen></iframe>';
+                    htmlVideo = '<iframe width="420" height="315" src="http://www.youtube.com/embed/xDDJVpPJjkk" frameborder="0" allowfullscreen></iframe>';
                 else if(nombreVideo == "bajo.flv")
-                    htmlVideo == '<iframe width="420" height="315" src="http://www.youtube.com/embed/R76OAk0FM5Q" frameborder="0" allowfullscreen></iframe>';
+                    htmlVideo = '<iframe width="420" height="315" src="http://www.youtube.com/embed/R76OAk0FM5Q" frameborder="0" allowfullscreen></iframe>';
             }
             else if(arrayEvaluacion[i][0][2] == "comic" && arrayEvaluacion[i][0][1] == siguienteInstrumento){
                 var rutaComic = '<?php echo base_url("multimedia/Comic/"); ?>/' + arrayEvaluacion[i][0][0];

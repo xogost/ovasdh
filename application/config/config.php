@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://181.50.254.7:12000/ovasdh';
+$config['base_url']	= 'http://localhost/ovasdh';
 
 /*
 |--------------------------------------------------------------------------
