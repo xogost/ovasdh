@@ -33,7 +33,7 @@ class examenfinal extends CI_Controller {
                         if ($consecutivoRespuesta == $respuestaCorrecta)
                             $funcionJavaScriptSuma = 1;
                         $subcategoriaTexto = str_replace(" ", "_", $subcategoria->subcategoria);
-                        $html .= "<li><label for='radio$itemRespuesta->id'>$itemRespuesta->texto</label><input class='". $subcategoriaTexto ."' name='preg$itemPregunta->id' type='radio' correcta='$funcionJavaScriptSuma' id='radio$itemRespuesta->id' value='$itemRespuesta->id'/></li>";
+                        $html .= "<li><input style='display: inline-block;' class='". $subcategoriaTexto ."' name='preg$itemPregunta->id' type='radio' correcta='$funcionJavaScriptSuma' id='radio$itemRespuesta->id' value='$itemRespuesta->id'/><label style='display: inline-block; margin-left: 10px;' for='radio$itemRespuesta->id'>$itemRespuesta->texto</label></li>";
                         $consecutivoRespuesta++;
                     }
                 }
