@@ -1,10 +1,13 @@
 <script type="text/javascript">
+    var test = "<?php echo $test;?>";
     var textPregunta = "";
     var arrayImagenes = new Array(); 
     $(document).ready(function(){
         textPregunta = $("#prevPregunta").html();
         $("#subcategorias").val("<?php echo $subcategoria; ?>");
         $("#respuestacorrecta").val("<?php echo $respuestacorrecta; ?>");
+        if(test == "-1")
+            $("#valorPregunta").css("display","none");
     });
     function prev(){
         for (var item in arrayImagenes) {
@@ -43,10 +46,10 @@
                 <textarea style="width: 80%;" name="pregunta" id="pregunta" placeholder="Ingrese texto aqui..." ><?php echo $pregunta; ?></textarea> 
             </div>
         </div>
-        <div class="control-group">
+        <div id="valorPregunta" class="control-group">
             <label class="control-label" from="valor">Valor</label>
             <div class="controls">
-                <input name="valor" id="valor" type="text" placeholder="Ingrese texto aqui..." value="<?php echo $valor; ?>"/> 
+                <input name="valor" id="valor" type="text" placeholder="Ingrese valor aqui..." value="<?php echo $valor; ?>"/> 
             </div>
         </div>
         <div class="control-group">
