@@ -36,7 +36,6 @@ class Respuestas_model extends CI_Model {
     }
     
     function insertResultadosRespuestas($username, $subcategoria, $resultado, $fechacreacion){
-        $this->db->query("DELETE FROM resultados_examen_final WHERE USERNAME = '$username' ");
         $this->db->query("INSERT INTO resultados_examen_final (username,subcategoria,resultado,fechacreacion) VALUES ('$username', '$subcategoria', '$resultado', '$fechacreacion');");
         return true;
     }
@@ -52,7 +51,7 @@ class Respuestas_model extends CI_Model {
     }
     
     function consultarResultadosFinal($username){
-        return $this->db->query("SELECT subcategoria, resultado FROM cuestionario.resultados_examen_final WHERE username = '$username'");
+        return $this->db->query("SELECT subcategoria, resultado FROM cuestionario.resultados_examen_final WHERE username = '$username' ORDER BY fechacreacion DESC, subcategoria ASC LIMIT 0, 18;");
     }
 
 }

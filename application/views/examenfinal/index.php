@@ -39,7 +39,7 @@
                 data: {"username": '<?php echo $user; ?>', "arraySubcategorias":arraySubcategoriasString.toString(), "arrayResultados": arrayResultadosString.toString() },
                 success: function(){
                     alert("El examen final se almaceno con exito.");
-                    window.location = "<?php echo site_url("site/"); ?>";
+                    //window.location = "<?php echo site_url("site/"); ?>";
                 },
                 error: function(){
                     alert("Error al almacenar el examen final.");
