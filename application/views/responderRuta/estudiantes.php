@@ -30,7 +30,7 @@
         resultadoTest = resultadoTest + valor;
     }
     function validarResultadoTest(){
-        if(parseInt(valorAprobacionTest) >= resultadoTest){
+        if(parseInt(valorAprobacionTest) <= resultadoTest){
             alert('Muy bien!, El test fue superado correctamente. \n El resultado obtenido fue ' + resultadoTest + '/' + valorAprobacionTest);
             $.ajax({
                 url: "<?php echo site_url("test/saveResultTest"); ?>",
