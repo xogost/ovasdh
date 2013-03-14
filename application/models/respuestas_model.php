@@ -36,6 +36,7 @@ class Respuestas_model extends CI_Model {
     }
     
     function insertResultadosRespuestas($username, $subcategoria, $resultado, $fechacreacion){
+        $this->db->query("DELETE FROM resultados_examen_final WHERE USERNAME = '$username' ");
         $this->db->query("INSERT INTO resultados_examen_final (username,subcategoria,resultado,fechacreacion) VALUES ('$username', '$subcategoria', '$resultado', '$fechacreacion');");
         return true;
     }
