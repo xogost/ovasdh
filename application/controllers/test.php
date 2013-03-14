@@ -114,5 +114,12 @@ class Test extends CI_Controller {
         $this->respuestas->insertResultadosTest($this->session->userdata("username"), $testid, $intentos);
         return true;
     }
+    
+    function eliminar(){
+        $idtest = $_POST["idtest"];
+        $this->load->model("test_model","Test", True);
+        $this->Test->delete($idtest);
+        echo true;
+    }
 
 }
