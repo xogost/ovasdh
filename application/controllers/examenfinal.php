@@ -58,7 +58,8 @@ class examenfinal extends CI_Controller {
         $arraySubcategorias = split(',',$Subcategorias);
         $arrayResultados = split(',',$Resultados);
         $fechacreacion = date('d/m/y H:m:s');
-        echo $fechacreacion;
+        echo count($arraySubcategorias);
+        $this->Respuestas->deleteResultadosUsuario($username);
         for($item = 0;$item < count($arraySubcategorias);$item++){
             $this->Respuestas->insertResultadosRespuestas($username, $arraySubcategorias[$item], $arrayResultados[$item], $fechacreacion);   
         }

@@ -27,9 +27,12 @@
                     resultadoFinal ="Bueno";
                 else if(bueno == 1 && excelente == 1)
                     resultadoFinal = "Regular";
-                else if(bueno == 0 && excelente == 0)
+                else
                     resultadoFinal = "Malo";
-                
+                console.log(excelente);
+                console.log(bueno);
+                console.log(malo);
+                console.log(resultadoFinal);
                 arrayResultadosString.push(resultadoFinal);
             }
             
