@@ -1,3 +1,13 @@
+<script>
+    var examenfinal = "<?php echo $id; ?>";
+    
+    $(document).ready(function(){
+        if(examenfinal == "-1")
+            $("#valorcontrol").css("display", "none");
+        else
+            $("#valorcontrol").css("display", "block");
+    });
+</script>
 <div id="contentTest">
     <h1>Administracion de Test</h1>
     <p class="lead">Ingresa la información requerida para los campos disponibles, y genera una pregunta completa luego de terminar el proceso.</p>
@@ -22,7 +32,7 @@
                 <input name="pregunta" id="pregunta" type="text" placeholder="Ingrese texto aqui..." value=""/> 
             </div>
         </div>
-        <div class="control-group">
+        <div id="valorcontrol" class="control-group">
             <label class="control-label" from="valor">Valor</label>
             <div class="controls">
                 <input name="valor" id="valor" type="text" placeholder="Ingrese texto aqui..." value=""/> 
